@@ -16,19 +16,20 @@
 .miniC {
   height: 100px;
   width: 100px;
+  font-size: 70px;
+  font-family: cursive;
   background-color: white;
   border: solid 1px black;
 }
 .objCenter {
-  
-    font-size: 200%;
-    background-color: red;
+  font-size: 200%;
+  background-color: red;
   height: 50px;
   width: 50px;
   margin-left: 25%;
   margin-top: 25%;
 }
-#Style-X{
+#Style-X {
   font-size: 40px;
   font-family: cursive;
   margin-left: 35px;
