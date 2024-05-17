@@ -1,10 +1,23 @@
 // VARIABLES 
 
 let divs = document.getElementsByClassName('miniC');
-let div1 = document.getElementById('div1');
-let div2 = document.getElementById('div2');
-let div3 = document.getElementById('div3');
+let reiniciar = document.getElementById("reiniciar")
+let turno = 0;
+let nombreTurno = document.getElementById("nombreTurno")
+let Jugador1 = "O"
+
 // FUNCIONALIDAD
+
+
+function changePlay() {
+    if (Jugador1 == "X") {
+        Jugador1 = "O"
+        return Jugador1
+    } else {
+        Jugador1 = "X"
+        return Jugador1
+    }
+}
 
 const matriz = [
     [1, 2, 3],
@@ -21,41 +34,109 @@ matriz[1][2] = " "
 matriz[2][0] = " "
 matriz[2][1] = " "
 matriz[2][2] = " "
-// --------------------------------------------------------------------------------------
 
-div1.addEventListener("click", function () {
-    let nuevo = document.createElement("p")
-    nuevo.id = "Style-X"
-    nuevo.innerHTML = matriz[0][0] = "X"
-    div1.appendChild(nuevo)
-    console.log(nuevo);
-})
-div2.addEventListener("click", function () {
-    let nuevo = document.createElement("p")
-    nuevo.id = "Style-X"
-    nuevo.innerHTML = matriz[0][1] = "X"
-    div2.appendChild(nuevo)
-    console.log(nuevo);
-})
-div3.addEventListener("click", function () {
-    let nuevo = document.createElement("p")
-    nuevo.id = "Style-X"
+divs[0].addEventListener("click", function () {
+   nombreTurno.innerHTML = "Es turno de Derek"
+    if (turno === 1) {
+        divs[0].innerHTML = matriz[0][0] = changePlay()
+    } else {
+        nombreTurno.innerHTML = "Es turno de PC"
+        divs[0].innerHTML = matriz[0][0] = changePlay()
+        turno = 0
+    }
 
-    nuevo.innerHTML = matriz[0][2] = "X"
-    div3.appendChild(nuevo)
-    console.log(nuevo);
 })
-// for (let i = 0; i < divs.length; i++) {
-//     divs[i].addEventListener('click',function () {
+divs[1].addEventListener("click", function () {
+    nombreTurno.innerHTML = "Es turno de Derek"
+    if (turno === 0) {
+        divs[1].innerHTML = matriz[0][1] = changePlay()
+        turno = 1
+    } else {
+        nombreTurno.innerHTML = "Es turno de PC"
+        divs[1].innerHTML = matriz[0][1] = changePlay()
+        turno = 0
+    }
+})
+divs[2].addEventListener("click", function () {
+    nombreTurno.innerHTML = "Es turno de Derek"
+    if (turno === 0) {
+        divs[2].innerHTML = matriz[0][2] = changePlay()
+        turno = 1
+    } else {
+        nombreTurno.innerHTML = "Es turno de PC"
+        divs[2].innerHTML = matriz[0][2] = changePlay()
+        turno = 0
+    }
+})
+divs[3].addEventListener("click", function () {
+    nombreTurno.innerHTML = "Es turno de Derek"
+    if (turno === 0) {
+        divs[3].innerHTML = matriz[1][0] = changePlay()
+        turno = 1
+    } else {
+        nombreTurno.innerHTML = "Es turno de PC"
+        divs[3].innerHTML = matriz[1][0] = changePlay()
+        turno = 0
+    }
+})
+divs[4].addEventListener("click", function () {
+    nombreTurno.innerHTML = "Es turno de Derek"
+    if (turno === 0) {
+        divs[4].innerHTML = matriz[1][1] = changePlay()
+        turno = 1
+    } else {
+        nombreTurno.innerHTML = "Es turno de PC"
+        divs[4].innerHTML = matriz[1][1] = changePlay()
+        turno = 0
+    }
+})
+divs[5].addEventListener("click", function () {
+    nombreTurno.innerHTML = "Es turno de Derek"
+    if (turno === 0) {
+        divs[5].innerHTML = matriz[1][2] = changePlay()
+        turno = 1
+    } else {
+        nombreTurno.innerHTML = "Es turno de PC"
+        divs[5].innerHTML = matriz[1][2] = changePlay()
+        turno = 0
+    }
+})
+divs[6].addEventListener("click", function () {
+    nombreTurno.innerHTML = "Es turno de Derek"
+    if (turno === 0) {
+        divs[6].innerHTML = matriz[2][0] = changePlay()
+        turno = 1
+    } else {
+        nombreTurno.innerHTML = "Es turno de PC"
+        divs[6].innerHTML = matriz[2][0] = changePlay()
+        turno = 0
+    }
+})
+divs[7].addEventListener("click", function () {
+    nombreTurno.innerHTML = "Es turno de Derek"
+    if (turno === 0) {
+        divs[7].innerHTML = matriz[2][1] = changePlay()
+        turno = 1
+    } else {
+        nombreTurno.innerHTML = "Es turno de PC"
+        divs[7].innerHTML = matriz[2][1] = changePlay()
+        turno = 0
+    }
+})
+divs[8].addEventListener("click", function () {
+    nombreTurno.innerHTML = "Es turno de Derek"
+    if (turno === 0) {
+        divs[8].innerHTML = matriz[2][2] = changePlay()
+        turno = 1
+    } else {
+        nombreTurno.innerHTML = "Es turno de PC"
+        divs[8].innerHTML = matriz[2][2] = changePlay()
+        turno = 0
+    }
+})
 
-//         let nuevo = document.createElement("p")
-//         nuevo.id = "Style-X"
-//         let matrizX1 = matriz[0][0] = "X"
-//         nuevo.innerHTML = matrizX1
-//         divs[i].appendChild(nuevo)
-//         console.log(nuevo);
-//     })
-// }
+// ------------------------------------------------------------------------------------------
+
 // -------------------------------------------------------------------------------------------------------------------
 if (matriz[0][0] === "X" && matriz[0][1] === "X" && matriz[0][2] === "X") {
     alert("xd")
@@ -89,6 +170,24 @@ if (matriz[0][0] === "X" && matriz[0][1] === "X" && matriz[0][2] === "X") {
     alert("OD")
 } else if (matriz[0][2] === "O" && matriz[1][2] === "O" && matriz[2][2] === "O") {
     alert("xd")
-};
-
-
+}
+reiniciar.addEventListener("click", function () {
+    matriz[0][0] = " "
+    matriz[0][1] = " "
+    matriz[0][2] = " "
+    matriz[1][0] = " "
+    matriz[1][1] = " "
+    matriz[1][2] = " "
+    matriz[2][0] = " "
+    matriz[2][1] = " "
+    matriz[2][2] = " "
+    divs[0].innerHTML = " "
+    divs[1].innerHTML = " "
+    divs[2].innerHTML = " "
+    divs[3].innerHTML = " "
+    divs[4].innerHTML = " "
+    divs[5].innerHTML = " "
+    divs[6].innerHTML = " "
+    divs[7].innerHTML = " "
+    divs[8].innerHTML = " "
+})
