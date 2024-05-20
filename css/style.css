@@ -1,29 +1,60 @@
+body{
+  background-color: #0b1721;
+
+}
 .juego {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   gap: 1em;
   margin-top: 2%;
-  margin-left: 40%;
+  margin-left: 39%;
 }
 .title {
   font-size: 25px;
   font-family: 'Times New Roman', Times, serif;
+  color: white;
+  margin-left: 3%;
  
 }
 .contenedor {
   display: grid;
   grid-template-columns: 100px 100px 100px;
 }
+.contenedor2 {
+  display: grid;
+  grid-template-columns: 100px 100px 100px;
+  background-color: rgba(225, 225, 225, 0.063);
+  height: 310px;
+  width: 303px;
+  margin-top: 85px;
+  position: absolute;
+}
+/* .contenedor3{
+  display: grid;
+  grid-template-columns: 100px 100px 100px;
+  background-color: rgba(225, 225, 225, 0);
+  height: 310px;
+  width: 303px;
+  margin-top: 85px;
+  position: absolute;
+}
+#comtenedor3{
+  display: block;
+} */
+#contenedor2{
+  display: none;
+}
 .miniC {
   height: 100px;
   width: 100px;
   font-size: 70px;
   font-family: 'Times New Roman', Times, serif;
-  background-color: white;
-  border-left: 2px solid black;
-  border-bottom: 2px solid black;
+  background-color: transparent;
+  border-left: 2px solid white;
+  border-bottom: 2px solid white;
   display: flex;
   justify-content: center;
+  color: white;
 }
 .gridFinal{
   display: grid;
@@ -45,23 +76,11 @@
 #div9{
   border-bottom: none;
 }
-.objCenter {
-  font-size: 200%;
-  background-color: red;
-  height: 50px;
-  width: 50px;
-  margin-left: 25%;
-  margin-top: 25%;
-}
-#Style-X {
-  font-size: 40px;
-  font-family: cursive;
-  margin-left: 35px;
-  margin-top: 20px;
-}
+
 #nombreTurno{
   font-family: cursive;
-  margin-left: 8%;
+  margin-left: 5%;
+  color: white;
 }
 #reiniciar{
   height: 50px;
@@ -71,9 +90,9 @@
   font-family: cursive;
   font-size: 15px;
   border-radius: 100px;
-  margin-left: 15%;
+  margin-left: 11%;
 }
 #reiniciar:hover{
   transition: 1s ease;
-  box-shadow: 10px 10px 100px rgb(38, 38, 95);
+  box-shadow: 10px 10px 100px rgb(255, 255, 255);
 }
