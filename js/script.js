@@ -5,7 +5,6 @@ let reiniciar = document.getElementById("reiniciar");
 let turno = 0; // variable para validar los turnos de los jugadores
 let nombreTurno = document.getElementById("nombreTurno");
 let Jugador1 = "O"; // variable para poner X y O usada en la funcion ChangePlay
-let contenedor2 = document.getElementById("contenedor");
 
 // FUNCIONALIDAD
 
@@ -28,8 +27,6 @@ const matriz = [
     ["", "", ""],
 ];
 console.log(matriz);
-
-
 function juegoFuncion(index) {
     // ese index es el del bucle de abajo.
     let fila = Math.floor(index / 3); // el math.floor lo que hace es redondear para abajo el numero entero mas cercano// lo que va a hacer es dividir index / 3, index son las posiciones de los divs, por ejemplo la posicion 0 de mi index seria el primero cuadrito // por ejemplo la la posicion 0/3 va a ser = a "0" entonces es la fila numero 0, 5/3 es 1.6666 entonces se redondea a el numero entero mas cercano de abajo // el cual seria 1, entonces 5/3 va a ser la fila numero 1 y solo hay 3 filas, la 0,1 y 2, el ultimo div iterado por mi index es 8 entonces 8/3 es 2.666// entonces se redondea a 2 y esa seria mi ultima posicion. División (/):
@@ -39,27 +36,30 @@ function juegoFuncion(index) {
         matriz[fila][columna] = changePlay(); // la funcion ChangePlay() para que me ponga los simbolos jugador1 empieza valiendo "O" y dice que si vale 0 entonces el primera valor va // a ser una "X", el siguiente turno va a valer "O" porque dice, si no vale "O" osea si vale "X" entonces jugador1 va a valer "O"
         divs[index].innerHTML = matriz[fila][columna];
         turno = 1 - turno; // si turno comienza en 0 entonces juega jugador X, ahora turno vale 1, juega jugador O, si en esa vuelta de O turno vale 1 y es 1 - turno // osea si es 1-turno entonces es 1-1 y eso es 0, se alternan entre jugador X y O
-        nombreTurno.innerHTML = "Es turno de PC"; 
-
-        if (turno == 1) { // si turno es igual a 1
-
+        nombreTurno.innerHTML = "Es turno de PC";
+        if (turno == 1) {
+            // si turno es igual a 1
+            document.getElementById("contenedor3").style.display = "block";
             let perrito = ""; // se crea la variable
-            for (let i = 0; i < 9; i++) { // se va a iterar 9 veces el for
-                perrito = Math.floor(Math.random() * 9) // la primera vuelta es perrito = a Math.floor(Math.random() * 9) para que se eligan aletariamente las casillas
-                if (divs[perrito].innerHTML === "") { // si el div iterado por perrito es estrictamente igual a vacio entonces 
+            for (let i = 0; i < 9; i++) {// se va a iterar 9 veces el for
+                perrito = Math.floor(Math.random() * 9); // la primera vuelta es perrito = a Math.floor(Math.random() * 9) para que se eligan aletariamente las casillas
+                if (divs[perrito].innerHTML === "") {
+                    // si el div iterado por perrito es estrictamente igual a vacio entonces
                     break; // entonces  sale de el bucle y se ejecuta lo de abajo
                 }
             }
-
             setTimeout(() => {
-                if (divs[perrito].innerHTML === "") { // si divs[perrito].innerHTML es estricatemente igual a vacio, si no es estricatemente igual a vacio entonces no se pondra en ninguna casilla, entonces no se va a sobre escribir en ninguna casilla
+                if (divs[perrito].innerHTML === "") {
+                    // si divs[perrito].innerHTML es estricatemente igual a vacio, si no es estricatemente igual a vacio entonces no se pondra en ninguna casilla, entonces no se va a sobre escribir en ninguna casilla
                     divs[perrito].innerHTML = changePlay(); // a los divs iterados por perrito se le ejecuta la funcion de changePlay()
                     matriz[Math.floor(perrito / 3)][perrito % 3] = divs[perrito].innerHTML; // la matriz se actualiza para que se refle el movimiento de el math random
-                    turno = 0; // turno se vuelve 0 para jugar yo 
+                    turno = 0; // turno se vuelve 0 para jugar yo
                 }
                 nombreTurno.innerHTML = "Es turno de DEREK";
-            }, 1000); 
+                document.getElementById("contenedor3").style.display = "none";
+            }, 1000);
         }
+
     }
 }
 let cont = 0;
@@ -68,27 +68,15 @@ for (let index = 0; index < divs.length; index++) {
     divs[index].addEventListener("click", function () {
         // se ejecuta los divs  medidios con [index] y se ejecuta addEventListener en cada uno
         juegoFuncion(index); // aqui dentro va a ir llamada la funcion que se va a ejecutar para el juego
-        if (
-            // validad si una es verdadera o la otra es verdadera para que de el gane
-            ValidarWin0(matriz) ||
-            ValidarWin1(matriz) ||
-            ValidarWin2(matriz) ||
-            WinParalelo1(matriz) ||
-            WinParalelo2(matriz) ||
-            ValidarWin3(matriz) ||
-            ValidarWin4(matriz) ||
-            ValidarWin5(matriz)
-        ) {
-            alert("GANE");
+        if (ValidaWinFilasX(matriz) ) {
             document.getElementById("contenedor2").style.display = "block ";
             setTimeout(() => {
+
                 location.reload();
             }, 2000);
-        } else {
-            // si ninguna es verdadera entonces cont++ va a contar hasta 9, cada click contador va a ser 1+
-            cont++;
+        } else if(divs[index].innerHTML != " " ) {
+          cont++;    // si ninguna es verdadera entonces cont++ va a contar hasta 9, cada click contador va a ser 1+
         }
-        console.log("Contador: " + cont);
         if (cont == 9) {
             // si contador es igual a 9 osea si llega a 9 entonces va a tirar una alerta que dice "EMPATE"
             alert("Empate");
@@ -96,142 +84,33 @@ for (let index = 0; index < divs.length; index++) {
         }
     });
 }
-function ValidarWin0(matriz) {
+function ValidaWinFilasX(matriz) {
     let contadorX = 0;
     let contadorO = 0;
     for (let index = 0; index < matriz.length; index++) {
-        if (matriz[0][index] == "X") {
-            contadorX++;
-        } else if (matriz[0][index] == "O") {
-            contadorO++;
+        for (let index2 = 0; index2 < matriz.length; index2++) {
+            console.log(index);
+            if (matriz[index][index2] == "X") {
+                contadorX++;
+            } 
+            if (matriz[index2][index] == "X") {
+                contadorO++;
+            }
+            if (contadorO == 3) {
+                alert("U WIN")
+                return true
+            }
+            if (contadorX == 3) {
+                alert("U WIN")
+                return true
+            } 
         }
-    }
-    if (contadorO === 3 || contadorX === 3) {
-        return true;
-    } else {
-        return false;
+        contadorO = 0;
+        contadorX = 0; 
     }
 }
-function ValidarWin1(matriz) {
-    let contadorX = 0;
-    let contadorO = 0;
-    for (let index = 0; index < matriz.length; index++) {
-        if (matriz[1][index] == "X") {
-            contadorX++;
-        } else if (matriz[1][index] == "O") {
-            contadorO++;
-        }
-    }
-    if (contadorO === 3 || contadorX === 3) {
-        return true;
-    } else {
-        return false;
-    }
-}
-function ValidarWin2(matriz) {
-    let contadorX = 0;
-    let contadorO = 0;
-    for (let index = 0; index < matriz.length; index++) {
-        if (matriz[2][index] == "X") {
-            contadorX++;
-        } else if (matriz[2][index] == "O") {
-            contadorO++;
-        }
-    }
-    if (contadorO === 3 || contadorX === 3) {
-        return true;
-    } else {
-        return false;
-    }
-}
-function ValidarWin3(matriz) {
-    let contadorX = 0;
-    let contadorO = 0;
-    for (let index = 0; index < matriz.length; index++) {
-        if (matriz[index][0] == "X") {
-            contadorX++;
-        } else if (matriz[index][0] == "O") {
-            contadorO++;
-        }
-    }
-    if (contadorO === 3 || contadorX === 3) {
-        return true;
-    } else {
-        return false;
-    }
-}
-function ValidarWin4(matriz) {
-    let contadorX = 0;
-    let contadorO = 0;
-    for (let index = 0; index < matriz.length; index++) {
-        if (matriz[index][1] == "X") {
-            contadorX++;
-        } else if (matriz[index][1] == "O") {
-            contadorO++;
-        }
-    }
-    if (contadorO === 3 || contadorX === 3) {
-        return true;
-    } else {
-        return false;
-    }
-}
-function ValidarWin5(matriz) {
-    let contadorX = 0;
-    let contadorO = 0;
-    for (let index = 0; index < matriz.length; index++) {
-        if (matriz[index][2] == "X") {
-            contadorX++;
-        } else if (matriz[index][2] == "O") {
-            contadorO++;
-        }
-    }
-    if (contadorO === 3 || contadorX === 3) {
-        return true;
-    } else {
-        return false;
-    }
-}
-function WinParalelo1(matriz) {
-    let contadorX = 0;
-    let contadorO = 0;
-    for (let index = 0; index < matriz.length; index++) {
-        if (matriz[0][2] == "X" && matriz[1][1] == "X" && matriz[2][0] == "X") {
-            contadorX++;
-        } else if (
-            matriz[0][2] == "O" &&
-            matriz[1][1] == "O" &&
-            matriz[2][0] == "O"
-        ) {
-            contadorO++;
-        }
-    }
-    if (contadorO === 3 || contadorX === 3) {
-        return true;
-    } else {
-        return false;
-    }
-}
-function WinParalelo2(matriz) {
-    let contadorX = 0;
-    let contadorO = 0;
-    for (let index = 0; index < matriz.length; index++) {
-        if (matriz[0][0] == "X" && matriz[1][1] == "X" && matriz[2][2] == "X") {
-            contadorX++;
-        } else if (
-            matriz[0][0] == "O" &&
-            matriz[1][1] == "O" &&
-            matriz[2][2] == "O"
-        ) {
-            contadorO++;
-        }
-    }
-    if (contadorO === 3 || contadorX === 3) {
-        return true;
-    } else {
-        return false;
-    }
-}
+
+
 reiniciar.addEventListener("click", function () {
     location.reload();
 });
