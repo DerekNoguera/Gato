@@ -23,27 +23,25 @@ body{
 .contenedor2 {
   display: grid;
   grid-template-columns: 100px 100px 100px;
-  background-color: rgba(225, 225, 225, 0.063);
-  height: 310px;
-  width: 303px;
-  margin-top: 85px;
-  position: absolute;
-}
-/* .contenedor3{
-  display: grid;
-  grid-template-columns: 100px 100px 100px;
   background-color: rgba(225, 225, 225, 0);
   height: 310px;
   width: 303px;
   margin-top: 85px;
   position: absolute;
 }
-#comtenedor3{
-  display: block;
-} */
-#contenedor2{
+.contenedor3{
+  display: grid;
+  grid-template-columns: 100px 100px 100px;
+  background-color: rgba(0, 0, 0, 0);
+  height: 310px;
+  width: 303px;
+  margin-top: 85px;
+  position: absolute;
+}
+#contenedor3{
   display: none;
 }
+
 .miniC {
   height: 100px;
   width: 100px;
