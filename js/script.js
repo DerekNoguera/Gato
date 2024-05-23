@@ -19,7 +19,7 @@ function changePlay() {
         return Jugador1; // retornamos jugador1
     }
 }
-
+    
 const matriz = [
     //datos de el array
     ["", "", ""], // los campos de el array estan vacios para que se validen dentro de la funcion
@@ -37,6 +37,9 @@ function juegoFuncion(index) {
         divs[index].innerHTML = matriz[fila][columna];
         turno = 1 - turno; // si turno comienza en 0 entonces juega jugador X, ahora turno vale 1, juega jugador O, si en esa vuelta de O turno vale 1 y es 1 - turno // osea si es 1-turno entonces es 1-1 y eso es 0, se alternan entre jugador X y O
         nombreTurno.innerHTML = "Es turno de PC";
+        if (ValidaWinFilasX(matriz) || Diagonal(matriz)) {
+            turno = 0
+        }
         if (turno == 1) {
             // si turno es igual a 1
             document.getElementById("contenedor3").style.display = "block";
@@ -45,7 +48,7 @@ function juegoFuncion(index) {
                 // se va a iterar 9 veces el for
                 perrito = Math.floor(Math.random() * 9); // la primera vuelta es perrito = a Math.floor(Math.random() * 9) para que se eligan aletariamente las casillas
                 if (divs[perrito].innerHTML === "") {
-                    // si el div iterado por perrito es estrictamente igual a vacio entonces
+                     // si el div iterado por perrito es estrictamente igual a vacio entonces
                     break; // entonces  sale de el bucle y se ejecuta lo de abajo
                 }
             }
@@ -71,10 +74,12 @@ function juegoFuncion(index) {
                                     divs[0].innerHTML === "O" && divs[4].innerHTML === "O" && divs[8].innerHTML === "O" ||
                                     divs[6].innerHTML === "O" && divs[4].innerHTML === "O" && divs[2].innerHTML === "O")
                             ) {
+        
+                                setTimeout(() => {
+                                    location.reload()
+                                }, 2000);
                                 alert("GANO O");
                             }
-
-
                             //     if (divs[perrito].innerHTML[index][index2] === "O") {
                             //         contadorO1++;
                             //         console.log(divs[perrito].innerHTML[index][index2]);
@@ -93,9 +98,9 @@ function juegoFuncion(index) {
                         // contadorO1 = 0;
                         // contadorX1 = 0;
                     }
-                    matriz[Math.floor(perrito / 3)][perrito % 3] =
+                        matriz[Math.floor(perrito / 3)][perrito % 3] =
                         divs[perrito].innerHTML; // la matriz se actualiza para que se refle el movimiento de el math random
-                    turno = 0; // turno se vuelve 0 para jugar yo
+                        turno = 0; // turno se vuelve 0 para jugar yo
 
                     // console.log(matriz,"MAT")
                     // console.log(divs[perrito],"PER")
@@ -113,6 +118,7 @@ for (let index = 0; index < divs.length; index++) {
         // se ejecuta los divs  medidios con [index] y se ejecuta addEventListener en cada uno
         juegoFuncion(index); // aqui dentro va a ir llamada la funcion que se va a ejecutar para el juego
         if (ValidaWinFilasX(matriz) || Diagonal(matriz)) {
+        
             alert("GANO X");
             document.getElementById("contenedor2").style.display = "block ";
             setTimeout(() => {
