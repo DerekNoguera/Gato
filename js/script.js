@@ -64,7 +64,7 @@ function juegoFuncion(index) {
                             index2 < divs[perrito].innerHTML.length;
                             index2++
                         ) {
-                            if (
+                            if ( // validaciones de ganes de el bot
                                 (divs[0].innerHTML === "O" && divs[1].innerHTML === "O" && divs[2].innerHTML === "O" ||
                                     divs[3].innerHTML === "O" && divs[4].innerHTML === "O" && divs[5].innerHTML === "O" ||
                                     divs[6].innerHTML === "O" && divs[7].innerHTML === "O" && divs[8].innerHTML === "O" ||
@@ -118,7 +118,7 @@ for (let index = 0; index < divs.length; index++) {
         // se ejecuta los divs  medidios con [index] y se ejecuta addEventListener en cada uno
         juegoFuncion(index); // aqui dentro va a ir llamada la funcion que se va a ejecutar para el juego
         if (ValidaWinFilasX(matriz) || Diagonal(matriz)) {
-        
+        // si se cumple validar filas, osea mi funcion entonces se gana
             alert("GANO X");
             document.getElementById("contenedor2").style.display = "block ";
             setTimeout(() => {
@@ -135,7 +135,7 @@ for (let index = 0; index < divs.length; index++) {
     });
 }
 function ValidaWinFilasX(matriz) {
-    let contadorX = 0;
+    let contadorX = 0; //contadores para validar los ganes
     let contadorO = 0;
     for (let index = 0; index < matriz.length; index++) {
         for (let index2 = 0; index2 < matriz.length; index2++) {
@@ -149,6 +149,7 @@ function ValidaWinFilasX(matriz) {
             }
             if (contadorX == 3) {
                 return true;
+                //si se llega a tres ganes retornar un verdadero
             }
             if (contadorO == 3) {
                 return true;
@@ -161,6 +162,7 @@ function ValidaWinFilasX(matriz) {
 }
 
 function Diagonal(matriz) {
+    //validaciones de diagonales
     if (
         (matriz[0][0] === "X" && matriz[1][1] === "X" && matriz[2][2] === "X") ||
         (matriz[0][2] === "X" && matriz[1][1] === "X" && matriz[2][0] === "X")
